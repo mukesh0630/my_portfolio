@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Decorative rings around profile image */
+.ring-pulse {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at center, rgba(250,204,21,0.10), transparent 40%);
+  animation: pulse 3.5s ease-in-out infinite;
+  filter: blur(14px);
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.ring-rotate {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 9999px;
+  border: 1px solid rgba(250,204,21,0.12);
+  animation: rotate 8s linear infinite;
+  transform-origin: center;
+  opacity: 0.85;
+  z-index: 0;
+}
+
+.profile-img {
+  position: relative;
+  z-index: 10;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-pulse,
+  .ring-rotate,
+  img,
+  * {
+    animation-duration: 0s !important;
+    animation: none !important;
+    transition-duration: 0s !important;
+  }
+}
+
+/* Continuous profile decorations (no hover action) */
+.ring-pulse { transform-origin: center; transition: transform 600ms ease; }
+.ring-rotate { transform-origin: center; transition: transform 900ms linear; }
+.ring-shimmer { position: absolute; width: 420px; height: 420px; border-radius: 9999px; background: conic-gradient(from 180deg, rgba(250,204,21,0.06), rgba(250,204,21,0.0) 30%); filter: blur(12px); opacity: 0.65; animation: shimmer 6s linear infinite; z-index: 0; }
+
+@keyframes shimmer {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.02); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.profile-halo { position: absolute; width: 340px; height: 340px; border-radius: 9999px; background: radial-gradient(circle at center, rgba(250,204,21,0.12), transparent 45%); z-index: 1; pointer-events: none; }
+
+.orbit-dots { position: relative; width: 420px; height: 420px; }
+.orbit-dot { position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; background: rgba(250,204,21,0.95); border-radius: 50%; transform-origin: -180px 0; opacity: 0.95; filter: blur(0.6px); }
+.orbit-dot.o1 { animation: orbitA 7s linear infinite; transform: translate(-50%, -50%) translateX(180px) scale(1); }
+.orbit-dot.o2 { animation: orbitB 9s linear infinite; transform: translate(-50%, -50%) translateX(220px) scale(0.9); opacity: 0.85; }
+.orbit-dot.o3 { animation: orbitC 11s linear infinite; transform: translate(-50%, -50%) translateX(140px) scale(0.8); opacity: 0.75; }
+
+@keyframes orbitA { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(180px); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(180px); } }
+@keyframes orbitB { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(220px); } 100% { transform: translate(-50%, -50%) rotate(-360deg) translateX(220px); } }
+@keyframes orbitC { 0% { transform: translate(-50%, -50%) rotate(0deg) translateX(140px); } 100% { transform: translate(-50%, -50%) rotate(360deg) translateX(140px); } }
+
+/* Profile size & shadow polish */
+.profile-img { box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+
+/* Make burst a subtle continuous glow near the image (no hover) */
+.profile-burst { position: absolute; width: 360px; height: 360px; border-radius: 9999px; background: radial-gradient(circle, rgba(250,204,21,0.18), transparent 40%); opacity: 0.12; transform: scale(1); z-index: 2; pointer-events: none; }
+
+/* Additional small polish for particles behind content when fixed */
+html, body, #root { height: 100%; }
+
