@@ -33,14 +33,12 @@ export default function Portfolio() {
   const [profileUrl, setProfileUrl] = useState(null);
   useEffect(() => {
     let mounted = true;
+    const basePath = import.meta.env.BASE_URL;
     const candidates = [
-      '/profile.jpg',
-      '/profile.png',
-      '/profile.svg',
-      '/WhatsApp Image 2026-01-09 at 11.54.45 PM.jpeg',
-      '/src/assets/profile.jpg',
-      '/src/assets/profile.png',
-      '/src/assets/react.svg'
+      basePath + 'profile.jpg',
+      basePath + 'profile.png',
+      basePath + 'profile.svg',
+      basePath + 'WhatsApp Image 2026-01-09 at 11.54.45 PM.png',
     ];
     (async () => {
       for (const p of candidates) {
