@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import profileImage from '/profile.jpg';
 
 const skills = [
   "Python", "Java", "C", "C++", "JavaScript"
@@ -29,32 +30,8 @@ export default function Portfolio() {
   const [formStatus, setFormStatus] = useState('');
   const [formLoading, setFormLoading] = useState(false);
 
-  // Profile image loader: tries a few common paths and falls back to initials
-  const [profileUrl, setProfileUrl] = useState(null);
-  useEffect(() => {
-    let mounted = true;
-    const basePath = import.meta.env.BASE_URL;
-    const candidates = [
-      basePath + 'profile.jpg',
-      basePath + 'profile.png',
-      basePath + 'profile.svg',
-      basePath + 'WhatsApp Image 2026-01-09 at 11.54.45 PM.png',
-    ];
-    (async () => {
-      for (const p of candidates) {
-        try {
-          const res = await fetch(p, { method: 'GET' });
-          if (res.ok && mounted) {
-            setProfileUrl(p);
-            return;
-          }
-        } catch (e) {
-          // ignore and try next
-        }
-      }
-    })();
-    return () => { mounted = false };
-  }, []);
+  // Use imported profile image
+  const [profileUrl] = useState(profileImage);
 
   const [imgModalOpen, setImgModalOpen] = useState(false);
   useEffect(() => {
@@ -148,7 +125,7 @@ export default function Portfolio() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md" role="dialog" aria-modal="true" onClick={() => setImgModalOpen(false)}>
           <div className="relative max-w-[90%] max-h-[90%]" onClick={(e) => e.stopPropagation()}>
             <button aria-label="Close" onClick={() => setImgModalOpen(false)} className="absolute -top-6 -right-6 bg-purple-900 text-purple-200 p-2 rounded-full shadow-lg hover:bg-purple-800">✕</button>
-            <motion.img src={profileUrl || '/profile.jpg'} alt="Mukesh large" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-[100%] max-h-[80vh] rounded-lg shadow-2xl shadow-purple-500/50 object-cover" />
+            <motion.img src={profileUrl} alt="Mukesh large" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-[100%] max-h-[80vh] rounded-lg shadow-2xl shadow-purple-500/50 object-cover" />
           </div>
         </div>
       )}
