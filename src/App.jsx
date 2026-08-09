@@ -1,7 +1,7 @@
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import profileImage from '/profile.jpg';
+import profileImage from '/profile.png';
 
 const skills = [
   "Python", "Java", "C", "C++", "JavaScript"
@@ -14,9 +14,14 @@ const softSkills = ["Communication", "Teamwork", "Leadership", "Time Management"
 const projects = [
   {
     title: "AI Resume Analyzer",
-    description:
-      "Analyzes resumes vs job descriptions to produce ATS score, missing skills, learning roadmap, and AI insights. Built with React + Tailwind, Python + FastAPI, Firebase Firestore.",
-    tags: ["React", "FastAPI", "Firebase", "Tailwind"],
+    description: [
+      "ATS scoring engine with 6-category breakdown (skills, experience, projects, education, keywords, certifications)",
+      "Gemini 2.5 Flash integration for AI-driven resume analysis with local NLP fallback",
+      "Interactive AI career advisor chatbot with context-aware responses",
+      "Firebase auth, Firestore history tracking, and auto-generated PDF reports",
+      "Responsive dark-themed dashboard with data visualizations (Recharts)"
+    ],
+    tags: ["React", "FastAPI", "Gemini AI", "Firebase"],
     github: "https://github.com/mukesh0630/ai-resume-analyzer",
     demo: "https://ai-resume-analyzer-ea4bd.web.app/"
   }
@@ -112,7 +117,21 @@ export default function Portfolio() {
 
             <button type="button" onClick={() => setImgModalOpen(true)} className="rounded-full focus:outline-none focus:ring-4 focus:ring-purple-500/30 transform hover:-translate-y-1 transition relative">
               {profileUrl ? (
-                <motion.img whileHover={{ scale: 1.06, rotate: 2 }} src={profileUrl} alt="Mukesh" className="profile-img w-80 h-80 rounded-full object-cover ring-4 ring-purple-500 shadow-2xl shadow-purple-500/50" />
+                <div className="relative rounded-full overflow-hidden" style={{ width: '20rem', height: '20rem' }}>
+                  <motion.img
+                    whileHover={{ scale: 1.06, rotate: 2 }}
+                    src={profileUrl}
+                    alt="Mukesh"
+                    className="profile-img w-full h-full object-cover object-[center_15%]"
+                  />
+                  {/* Deep inset vignette to mask white edges and blend into dark bg */}
+                  <div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{
+                      boxShadow: 'inset 0 0 50px 25px rgba(10, 3, 30, 0.7), inset 0 0 100px 50px rgba(10, 3, 30, 0.4)',
+                    }}
+                  />
+                </div>
               ) : (
                 <motion.div whileHover={{ scale: 1.06, rotate: 2 }} className="profile-img w-80 h-80 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-4xl">MV</motion.div>
               )}
@@ -214,7 +233,15 @@ export default function Portfolio() {
             {projects.map(p => (
               <div key={p.title} className="rounded-2xl bg-gradient-to-br from-purple-900/30 to-pink-900/20 p-6 shadow-lg border border-purple-500/30 hover:shadow-xl hover:shadow-purple-500/30 transition transform hover:-translate-y-2">
                 <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent flex items-center gap-2"><Star size={18}/> {p.title}</h3>
-                <p className="text-purple-100 mb-3">{p.description}</p>
+                {Array.isArray(p.description) ? (
+                  <ul className="text-purple-100 mb-3 list-disc ml-5 space-y-1">
+                    {p.description.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-purple-100 mb-3">{p.description}</p>
+                )}
                 <div className="flex flex-wrap gap-3 mb-4">
                   {p.tags.map(t => (
                     <span key={t} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-purple-200 bg-purple-500/20 ring-1 ring-purple-500/50 hover:bg-purple-500/30 transition">{t}</span>
