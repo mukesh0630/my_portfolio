@@ -1,0 +1,12 @@
+RESUME PLACEHOLDER
+==================
+Please replace this file with the actual Mukesh_V_Resume.pdf
+
+Place the PDF file at:
+  d:\portfolio\mukesh-portfolio\public\Mukesh_V_Resume.pdf
+
+The resume download button in the portfolio points to:
+  /my_portfolio/Mukesh_V_Resume.pdf
+
+Once you place the PDF here, it will be served correctly on GitHub Pages.
+
