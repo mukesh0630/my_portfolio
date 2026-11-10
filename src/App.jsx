@@ -24,6 +24,19 @@ const projects = [
     tags: ["React", "FastAPI", "Gemini AI", "Firebase"],
     github: "https://github.com/mukesh0630/ai-resume-analyzer",
     demo: "https://ai-resume-analyzer-ea4bd.web.app/"
+  },
+  {
+    title: "Chai Talès",
+    description: [
+      "Multi-page responsive website with Home, Menu, About, and Contact pages",
+      "Custom animation engine with scroll-reveal, parallax, tilt cards, magnetic buttons, and typewriter effects",
+      "Interactive menu showcase with category filtering and hover-driven micro-animations",
+      "Glassmorphism UI components, animated gradient text, and floating particle effects",
+      "Fully responsive design with mobile hamburger navigation and scroll progress bar"
+    ],
+    tags: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "Font Awesome"],
+    github: "https://github.com/mukesh0630/Chai-Tales",
+    demo: "https://mukesh0630.github.io/Chai-Tales/"
   }
 ];
 
